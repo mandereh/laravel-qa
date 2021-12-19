@@ -17,7 +17,7 @@ class QuestionsController extends Controller
     {
         // \DB::enableQueryLog();
         $questions = Question::with('user')->latest()->paginate(5);
-       return view('questions.index', compact('questions'));
+        return view('questions.index', compact('questions'));
         // dd(\DB::getQueryLog());
     }
 
@@ -29,7 +29,7 @@ class QuestionsController extends Controller
     public function create()
     {
         $question = new Question();
-        return view('questions.create',compact('question'));
+        return view('questions.create', compact('question'));
     }
 
     /**
@@ -40,8 +40,8 @@ class QuestionsController extends Controller
      */
     public function store(AskQuestionRequest $request)
     {
-        $request->user()->questions()->create($request->only('title','body'));
-        return redirect()->route('questions.index')->with('success','Your question has been submitted');
+        $request->user()->questions()->create($request->only('title', 'body'));
+        return redirect()->route('questions.index')->with('success', 'Your question has been submitted');
     }
 
     /**
@@ -53,7 +53,7 @@ class QuestionsController extends Controller
     public function show(Question $question)
     {
         $question->increment('views');
-        return view('questions.show',compact('question'));
+        return view('questions.show', compact('question'));
     }
 
     /**
@@ -64,7 +64,10 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
-        return view('questions.edit',compact('question'));
+        if (\Gate::denies('update-question', $question)) {
+            abort(403, "Access Denied");
+        }
+        return view('questions.edit', compact('question'));
     }
 
     /**
@@ -76,8 +79,11 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        $question->update($request->only('title','body'));
-        return redirect()->route('questions.index')->with('success','Your question has been updated');
+        if (\Gate::denies('update-question', $question)) {
+            abort(403, 'Access Denied');
+        }
+        $question->update($request->only('title', 'body'));
+        return redirect()->route('questions.index')->with('success', 'Your question has been updated');
     }
 
     /**
@@ -88,7 +94,10 @@ class QuestionsController extends Controller
      */
     public function destroy(Question $question)
     {
+        if (\Gate::denies('delete-question', $question)) {
+            abort(403, 'Access denied');
+        }
         $question->delete();
-        return redirect()->route('questions.index')->with('success','Your question has been deleted');
+        return redirect()->route('questions.index')->with('success', 'Your question has been deleted');
     }
 }
