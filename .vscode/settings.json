@@ -1,7 +1,7 @@
 {
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-    "editor.defaultFormatter": "junstyle.php-cs-fixer",
+    "editor.defaultFormatter": "HookyQR.beautify",
     "workbench.editor.autoLockGroups": {
         "jupyter-notebook": true
     }
