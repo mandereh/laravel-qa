@@ -29,12 +29,12 @@
                                     @csrf
                                 </form>
                             @else
-                            @if ($answer->is_best)
-                                <a title="The question owner accepted this answer as best answer" class="{{ $answer->status }} mt-2"                                    >
-                                    <i class="fas fa-check fa-2x"></i>
-                                    {{-- <span class="favourite-count">123</span> --}}
-                                </a>
-                            @endif
+                                @if ($answer->is_best)
+                                    <a title="The question owner accepted this answer as best answer" class="{{ $answer->status }} mt-2"                                    >
+                                        <i class="fas fa-check fa-2x"></i>
+                                        {{-- <span class="favourite-count">123</span> --}}
+                                    </a>
+                                @endif
                             @endcan
                         </div>
                             <div class="media-body">
