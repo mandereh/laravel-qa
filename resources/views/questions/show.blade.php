@@ -22,7 +22,7 @@
                             'model' => $question
                         ])
                         <div class="media-body">
-                            {{ $question->body_html}}
+                            {!! $question->body_html !!}
                             <div class="row">
                                 <div class="col-4"></div>
                                 <div class="col-4"></div>

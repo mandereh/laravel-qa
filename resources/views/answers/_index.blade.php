@@ -33,7 +33,7 @@
                             
                         </div>
                             <div class="media-body">
-                                {{ $answer->body_html }}
+                                {!! $answer->body_html !!}
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="ml-auto">
