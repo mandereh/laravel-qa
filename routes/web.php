@@ -13,9 +13,7 @@
 
 use App\Http\Controllers\AnswersController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','QuestionsController@index');
 
 Auth::routes();
 
