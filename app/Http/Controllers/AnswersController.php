@@ -8,15 +8,20 @@ use Illuminate\Http\Request;
 
 class AnswersController extends Controller
 {
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function index()
-    // {
-    //     //
-    // }
+
+    public function __contruct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Question $question)
+    {
+        return $question->answers()->with('user')->simplePaginate(3);
+    }
 
     // /**
     //  * Show the form for creating a new resource.
