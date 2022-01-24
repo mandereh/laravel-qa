@@ -126,7 +126,7 @@ export default {
                     
         }
     },
-    y
     
+
 }
 </script>
